@@ -73,11 +73,19 @@ def do_query(uri):
     sys.stdout.write(json.dumps(parse_qs(uri)))
     sys.exit(0)
 
+def scrub_incoming(uri_like):
+    try:
+        v = json.loads(uri_like)['uri']
+    except ValueError:
+        v = uri_like
+        
+    return v
 
 if __name__ == '__main__':
     # Parse the CLI arguments...
+    
     args = docopt(__doc__)
-    uri = args['<uri>']
+    uri = scrub_incoming(args['<uri>'])
 
     # Execute the proper sub-command.
     if args['parse']:

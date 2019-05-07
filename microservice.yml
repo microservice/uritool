@@ -19,6 +19,17 @@ actions:
     help: |
       Parse a given URI into its parts.
     format:
-      command: ["python3", "uritool.py", "parse", "{uri}"]
+      command: ["python3", "uritool.py", "parse"]
+    output:
+      type: map
+  query:
+    arguments:
+      uri:
+        type: string
+        required: true
+    help: |
+      Parse a given URI's query fragment.
+    format:
+      command: ["python3", "uritool.py", "query"]
     output:
       type: map
