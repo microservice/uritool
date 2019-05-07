@@ -21,4 +21,4 @@ actions:
     format:
       command: ["python3", "uritool.py", "parse", "{uri}"]
     output:
-      type: string
+      type: map
