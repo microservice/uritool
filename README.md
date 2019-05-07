@@ -10,6 +10,9 @@ This microservice exists to provide utilities for dealing with URIs:
 ```coffee
 >>> uritool parse uri:'https://github.com/'
 {"uri": "https://github.com/", "scheme": "https", "userinfo": null, "host": "github.com", "path": "/", "query": null, "?": {}, "fragment": null, "netloc": "github.com"}
+
+>>> uritool parse uri:'https://httpbin.org/get?hello=world'
+{"hello": "world"}
 ```
 
 Curious to [learn more](https://docs.storyscript.io/)?
