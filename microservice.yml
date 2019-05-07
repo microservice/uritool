@@ -1,0 +1,24 @@
+omg: 1
+info:
+  version: 0.1.0
+  title: URI Tools
+  description: URI Tools
+  contact:
+    name: Kenneth Reitz
+    url: https://kennethreitz.org/
+    email: me@kennethreitz.org
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+actions:
+  parse:
+    arguments:
+      uri:
+        type: string
+        required: true
+    help: |
+      Parse a given URI into its parts.
+    format:
+      command: ["python3", "uritool.py", "parse", "{uri}"]
+    output:
+      type: string
