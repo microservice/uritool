@@ -8,7 +8,7 @@ This microservice exists to provide utilities for dealing with URIs:
 ## Direct usage in [Storyscript](https://storyscript.io/):
 
 ```coffee
->>> (uritool parse 'https://github.com/')
+>>> uritool parse 'https://github.com/'
 {"uri": "https://github.com/", "scheme": "https", "userinfo": null, "host": "github.com", "path": "/", "query": null, "?": {}, "fragment": null, "netloc": "github.com"}
 ```
 
