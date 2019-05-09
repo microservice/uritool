@@ -6,14 +6,10 @@ verify_ssl = true
 [dev-packages]
 pytest = "*"
 flake8 = "*"
-black = "*"
 
 [packages]
-docopt = "*"
+omg-micro = ">=0.2.2"
 rfc3986 = "*"
 
 [requires]
 python_version = "3.7"
-
-[pipenv]
-allow_prereleases = true

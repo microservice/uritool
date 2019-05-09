@@ -1,21 +1,14 @@
 #!/usr/bin/env python
 
-"""Naval Fate.
-
-Usage:
-  uritool.py parse <uri>
-  uritool.py query <uri>
-
-Options:
-  -h --help     Show this screen.
-"""
 
 import sys
 import json
 import urllib.parse
 
+import micro
 import rfc3986
-from docopt import docopt
+
+service = micro.Service(name='uritool')
 
 
 def flatten(x):
@@ -32,7 +25,7 @@ def parse(uri):
     return rfc3986.urlparse(uri)
 
 
-def parse_qs(uri):
+def query(uri):
     parsed = parse(uri)
 
     collection = {}
@@ -42,7 +35,8 @@ def parse_qs(uri):
     return collection
 
 
-def do_parse(uri):
+@service.register(path='/parse', method='get')
+def do_parse(uri: str):
 
     # Parse the incoming URI.
     parsed = parse(uri)
@@ -56,39 +50,17 @@ def do_parse(uri):
         'path': parsed.path,
         'query': parsed.query,
         # Special attribute for parsed query string:
-        '?': parse_qs(uri),
+        '?': parse(uri),
         'fragment': parsed.fragment,
         'netloc': parsed.netloc,
     }
-    # Print json to console.
-    sys.stdout.write(json.dumps(result))
-    sys.exit(0)
+    return result
 
 
-def do_query(uri):
+@service.register(path='/query', method='get')
+def do_query(uri: str):
+    return query(uri)
 
-    # Parse the incoming URI.
-    parsed = rfc3986.urlparse(uri)
-    # Print json to console.
-    sys.stdout.write(json.dumps(parse_qs(uri)))
-    sys.exit(0)
-
-def scrub_incoming(uri_like):
-    try:
-        v = json.loads(uri_like)['uri']
-    except ValueError:
-        v = uri_like
-        
-    return v
 
 if __name__ == '__main__':
-    # Parse the CLI arguments...
-    
-    args = docopt(__doc__)
-    uri = scrub_incoming(args['<uri>'])
-
-    # Execute the proper sub-command.
-    if args['parse']:
-        do_parse(uri=uri)
-    elif args['query']:
-        do_query(uri=uri)
+    service.serve()

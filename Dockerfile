@@ -2,4 +2,4 @@ FROM kennethreitz/pipenv
 
 COPY . /app
 
-CMD ["python3", "uritool.py"]
+CMD ["python3", "service.py"]

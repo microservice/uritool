@@ -1,6 +1,9 @@
 omg: 1
+lifecycle:
+  startup:
+    command: ["python3", "/app/service.py"]
 info:
-  version: 0.1.0
+  version: 0.1.1
   title: URI Tools
   description: URI Tools
   contact:
@@ -16,10 +19,13 @@ actions:
       uri:
         type: string
         required: true
+        in: query
     help: |
       Parse a given URI into its parts.
-    format:
-      command: ["python3", "uritool.py", "parse"]
+    http:
+      method: get
+      path: /parse
+      port: 8080
     output:
       type: map
   query:
@@ -27,9 +33,12 @@ actions:
       uri:
         type: string
         required: true
+        in: query
     help: |
       Parse a given URI's query fragment.
-    format:
-      command: ["python3", "uritool.py", "query"]
+    http:
+      method: get
+      path: /query
+      port: 8080
     output:
       type: map
