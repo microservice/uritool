@@ -3,7 +3,7 @@ lifecycle:
   startup:
     command: ["python3", "/app/service.py"]
 info:
-  version: 0.1.1
+  version: 0.1.2
   title: URI Tools
   description: URI Tools
   contact:
