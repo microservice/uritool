@@ -20,13 +20,13 @@ def flatten(x):
     return x
 
 
-def parse(uri):
+def do_parse(uri):
     # Parse the incoming URI
     return rfc3986.urlparse(uri)
 
 
-def query(uri):
-    parsed = parse(uri)
+def do_query(uri):
+    parsed = do_parse(uri)
 
     collection = {}
     for (k, v) in urllib.parse.parse_qsl(parsed.query, keep_blank_values=True):
@@ -35,11 +35,12 @@ def query(uri):
     return collection
 
 
-@service.register(path='/parse', method='get')
-def do_parse(uri: str):
+@service.register()
+def parse(uri: str) -> dict:
+    """Parse a given URI into its parts."""
 
     # Parse the incoming URI.
-    parsed = parse(uri)
+    parsed = do_parse(uri)
 
     # Create a representable body.
     result = {
@@ -50,16 +51,23 @@ def do_parse(uri: str):
         'path': parsed.path,
         'query': parsed.query,
         # Special attribute for parsed query string:
-        '?': parse(uri),
+        '?': do_query(uri),
         'fragment': parsed.fragment,
         'netloc': parsed.netloc,
     }
     return result
 
 
-@service.register(path='/query', method='get')
-def do_query(uri: str):
-    return query(uri)
+@service.register()
+def query(uri: str) -> dict:
+    """Parse a given URI's query fragment."""
+    return do_query(uri)
+
+
+@service.register(name="is_valid")
+def validate(uri: str) -> bool:
+    """Is the given URI valid?"""
+    return rfc3986.is_valid_uri(uri=uri)
 
 
 if __name__ == '__main__':
