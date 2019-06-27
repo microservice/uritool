@@ -42,7 +42,7 @@ actions:
       port: 8080
     output:
       type: map
-  is_valid:
+  isValid:
     arguments:
       uri:
         type: string
