@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+  - '10'
+
+services:
+  - docker
+
+before_install:
+  - npm i @microservices/cli
+
+script:
+  - npx oms build
+  - |
+    output="$(npx oms run --silent parse -a uri=https://httpbin.org/json | jq -c .)"
+    if [ "$output" != '{"?":{},"fragment":null,"host":"httpbin.org","netloc":"httpbin.org","path":"/json","query":null,"scheme":"https","uri":"https://httpbin.org/json","userinfo":null}' ] ; then echo "$output"; exit 1; fi
