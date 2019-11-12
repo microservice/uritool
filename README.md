@@ -1,47 +1,112 @@
-# _URITool_ OMG Microservice
+# _URI Tools_ Open Microservice
 
-[![Open Microservice Guide](https://img.shields.io/badge/OMG%20Enabled-👍-green.svg?)](https://microservice.guide)
-<!-- [![Docker Build Status](https://img.shields.io/docker/build/microservices/uritool.svg?style=for-the-badge)](https://hub.docker.com/r/microservices/uritool/) -->
+> URI Tools
 
-This microservice exists to provide utilities for dealing with URIs:
+[![Open Microservice Specification Version](https://img.shields.io/badge/Open%20Microservice-1.0-477bf3.svg)](https://openmicroservices.org)
+[![Open Microservices Spectrum Chat](https://withspectrum.github.io/badge/badge.svg)](https://spectrum.chat/open-microservices)
+[![Open Microservices Code of Conduct](https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg)](https://github.com/oms-services/.github/blob/master/CODE_OF_CONDUCT.md)
+[![Open Microservices Commitzen](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-## Direct usage in [Storyscript](https://storyscript.io/):
+## Introduction
 
-##### Parse
-```coffee
->>> uritool parse uri:'https://github.com/'
-{"uri": "https://github.com/", "scheme": "https", "userinfo": null, "host": "github.com", "path": "/", "query": null, "?": {}, "fragment": null, "netloc": "github.com"}
+This project is an example implementation of the
+[Open Microservice Specification](https://openmicroservices.org), a standard
+originally created at [Storyscript](https://storyscript.io) for building
+highly-portable "microservices" that expose the events, actions, and APIs inside
+containerized software.
+
+## Getting Started
+
+The `oms` command-line interface allows you to interact with Open Microservices.
+If you're interested in creating an Open Microservice the CLI also helps
+validate, test, and debug your `oms.yml` implementation!
+
+See the [oms-cli](https://github.com/microservices/oms) project to learn more!
+
+### Installation
+
 ```
-##### Query
-```coffee
->>> uritool query uri:'https://httpbin.org/get?hello=world'
-{"hello": "world"}
+npm install -g @microservices/oms
 ```
-##### IsValid
-```coffee
->>> uritool isValid uri:'https://github.com/'
-true
-```
-Curious to [learn more](https://docs.storyscript.io/)?
 
-✨🍰✨
+## Usage
 
-## Usage with [OMG CLI](https://www.npmjs.com/package/omg)
+### Open Microservices CLI Usage
 
-##### Parse
+Once you have the [oms-cli](https://github.com/microservices/oms) installed, you
+can run any of the following commands from within this project's root directory:
+
+#### Actions
+
+##### parse
+
+> Parse a given URI into its parts.
+
+##### Action Arguments
+
+| Argument Name | Type     | Required | Default | Description              |
+| :------------ | :------- | :------- | :------ | :----------------------- |
+| uri           | `string` | `true`   | None    | No description provided. |
+
 ```shell
-$ omg run parse -a uri=<URI_TO_PARSE>
-```
-##### Query
-```shell
-$ omg run query -a uri=<URI>
-```
-##### Is Valid
-```shell
-$ omg run isValid -a uri=<URI>
+oms run parse \
+    -a uri='*****'
 ```
 
-**Note**: The OMG CLI requires [Docker](https://docs.docker.com/install/) to be installed.
+##### query
 
-## License
-[MIT License](https://github.com/omg-services/uritool/blob/master/LICENSE).
+> Parse a given URI's query fragment.
+
+##### Action Arguments
+
+| Argument Name | Type     | Required | Default | Description              |
+| :------------ | :------- | :------- | :------ | :----------------------- |
+| uri           | `string` | `true`   | None    | No description provided. |
+
+```shell
+oms run query \
+    -a uri='*****'
+```
+
+##### isValid
+
+> Is the given URI valid?
+
+##### Action Arguments
+
+| Argument Name | Type     | Required | Default | Description              |
+| :------------ | :------- | :------- | :------ | :----------------------- |
+| uri           | `string` | `true`   | None    | No description provided. |
+
+```shell
+oms run isValid \
+    -a uri='*****'
+```
+
+## Contributing
+
+All suggestions in how to improve the specification and this guide are very
+welcome. Feel free share your thoughts in the Issue tracker, or even better,
+fork the repository to implement your own ideas and submit a pull request.
+
+[![Edit uritool on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/oms-services/uritool)
+
+This project is guided by
+[Contributor Covenant](https://github.com/oms-services/.github/blob/master/CODE_OF_CONDUCT.md).
+Please read out full
+[Contribution Guidelines](https://github.com/oms-services/.github/blob/master/CONTRIBUTING.md).
+
+## Additional Resources
+
+- [Install the CLI](https://github.com/microservices/oms) - The OMS CLI helps
+  developers create, test, validate, and build microservices.
+- [Example OMS Services](https://github.com/oms-services) - Examples of
+  OMS-compliant services written in a variety of languages.
+- [Example Language Implementations](https://github.com/microservices) - Find
+  tooling & language implementations in Node, Python, Scala, Java, Clojure.
+- [Storyscript Hub](https://hub.storyscript.io) - A public registry of OMS
+  services.
+- [Community Chat](https://spectrum.chat/open-microservices) - Have ideas?
+  Questions? Join us on Spectrum.
