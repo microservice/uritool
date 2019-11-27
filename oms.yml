@@ -1,18 +1,20 @@
-omg: 1
-lifecycle:
-  startup:
-    command: ["python3", "/app/service.py"]
+oms: 1
 info:
   version: 0.1.3
   title: URI Tools
   description: URI Tools
   contact:
-    name: Kenneth Reitz
-    url: https://kennethreitz.org/
-    email: me@kennethreitz.org
+    name: Open Microservices
+    url: 'https://openmicroservices.org'
+    email: core@openmicroservices.org
   license:
     name: MIT
-    url: https://opensource.org/licenses/MIT
+    url: 'https://opensource.org/licenses/MIT'
+lifecycle:
+  startup:
+    command:
+      - python3
+      - /app/service.py
 actions:
   parse:
     arguments:
